@@ -1,0 +1,17 @@
+# Python specifics
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & Secrets (NEVER UPLOAD THESE)
+.env
+credentials.json
+token.json
+client_secret.json
+
+# Local Folders
+downloads/
+logs/
+
+# VS Code
+.vscode/

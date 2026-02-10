@@ -1,0 +1,15 @@
+langchain
+langchain-groq
+langchain-community
+langchain-core
+langchain-google-community
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+gspread
+pypdf
+pydantic
+pydantic_settings
+python-dotenv
+logging
+base64
