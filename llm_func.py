@@ -86,6 +86,7 @@ class Interns(BaseModel):
     exp: str = Field(description="Total years of experience (e.g., '2 years', 'Fresher'). Default to '0 years'")
     status: Literal['New', 'Old'] = Field(description="Always return 'New' for incoming applications")
     summary: str = Field(description="A concise 2-sentence summary of the candidate's profile")
+    question: str = Field(description="3 to 5 question for asking from candidate from its weakness")
 
 
 # ============================================================================
@@ -289,6 +290,7 @@ def extract_llm(email_body: str, pdf_text: str, skip_validation: bool = False) -
         2. If a field is missing, use the default value specified in the schema.
         3. For 'skills', extract the most relevant technical skills (Python, AI, Agents, etc.).
         4. Always set 'status' to 'New'.
+        5. Make 3 to 5 interview questions that are the weakness of candidate that recuritor can ask while taking interview from candidate  
         """),
         ("user", """
         Here is the candidate data:
@@ -351,6 +353,7 @@ def save_to_sheets(data: Dict, file_name: str = "intern_can"):
     exp = data.get('exp', "")
     status = data.get('status', "")
     summary = data.get('summary', "")
+    question = data.get('question',"")
 
     
     if isinstance(skills, list):
@@ -358,7 +361,7 @@ def save_to_sheets(data: Dict, file_name: str = "intern_can"):
     else:
         skills_str = str(skills)
 
-    row = [name, email, phone, skills_str, exp, status, summary]
+    row = [name, email, phone, skills_str, exp, status, summary, question]
     
     logger.debug(f"Row to insert: {row}")
 
@@ -382,7 +385,7 @@ def save_to_sheets(data: Dict, file_name: str = "intern_can"):
         ws = sh.sheet1
         
         # Add headers
-        headers = ["Name", "Email", "Phone", "Skills", "Experience", "Status", "Summary"]
+        headers = ["Name", "Email", "Phone", "Skills", "Experience", "Status", "Summary","questions"]
         ws.append_row(headers)
         
         logger.info(f"Created new sheet with headers: {headers}")
@@ -423,6 +426,7 @@ def save_rejected_to_sheets(email_sender: str, document_type: str, reason: str, 
         ws.append_row(["Timestamp", "Sender", "Document Type", "Rejection Reason"])
         ws.append_row(row)
         logger.info("Created rejection tracking sheet")
+
 
 
 # ============================================================================

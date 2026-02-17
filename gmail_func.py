@@ -253,7 +253,9 @@ def extract_text_from_pdf(pdf_path: str) -> str:
         logger.debug(f"Processing {len(reader.pages)} pages")
 
         for page in reader.pages:
-            full_txt += page.extract_text() + "\n"
+            text = page.extract_text()
+            if text:
+                full_txt += text + "\n"
         
         clean_text = " ".join(full_txt.split())
 
