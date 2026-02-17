@@ -78,6 +78,7 @@ class Interns(BaseModel):
         exp: Total years of experience (e.g., '2 years', 'Fresher')
         status: Application status (always 'New' for incoming)
         summary: 2-sentence candidate profile summary
+        question: add context-aware candidate assessment engine for automated technical screening
     """
     name: str = Field(description="Full name of the candidate found in resume or email")
     email: str = Field(description="Email address. If not found, return 'N/A'")
