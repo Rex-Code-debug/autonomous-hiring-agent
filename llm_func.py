@@ -290,7 +290,7 @@ def extract_llm(email_body: str, pdf_text: str, skip_validation: bool = False) -
         2. If a field is missing, use the default value specified in the schema.
         3. For 'skills', extract the most relevant technical skills (Python, AI, Agents, etc.).
         4. Always set 'status' to 'New'.
-        5. Make 3 to 5 interview questions that are the weakness of candidate that recuritor can ask while taking interview from candidate  
+        5. Generate 3-5 technical interview questions based on the candidate's projects. Focus on edge cases or specific technologies they mentioned to test their depth of knowledge  
         """),
         ("user", """
         Here is the candidate data:
